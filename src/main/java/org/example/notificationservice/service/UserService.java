@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.notificationservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 }
