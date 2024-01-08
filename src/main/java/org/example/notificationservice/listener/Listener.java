@@ -23,6 +23,6 @@ public class Listener {
         User user = userService.getUser(badWeatherReport.customerId());
         log.info("User: {}", user);
 
-        emailService.sendEmail(user.getEmail(), "Bad weather", "Bad weather is coming. Stay inside!");
+        emailService.sendEmail(user);
     }
 }
