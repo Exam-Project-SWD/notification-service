@@ -11,4 +11,14 @@ public class TopicConfig {
     public NewTopic badWeatherTopic() {
         return new NewTopic(Topic.BAD_WEATHER.getTopicName(), 1, (short) 1);
     }
+
+    @Bean
+    public NewTopic changedCustomerTopic() {
+        return new NewTopic(Topic.CHANGED_CUSTOMER.getTopicName(), 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic deletedCustomerTopic() {
+        return new NewTopic(Topic.DELETED_CUSTOMER.getTopicName(), 1, (short) 1);
+    }
 }

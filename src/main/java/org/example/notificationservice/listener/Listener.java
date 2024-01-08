@@ -25,4 +25,20 @@ public class Listener {
 
         emailService.sendEmail(user);
     }
+
+    @KafkaListener(topics = "CHANGED_CUSTOMER", containerFactory = "userContainerFactory")
+    public void changedCustomerListener(User user) {
+        log.info("Received changed customer: {}", user);
+        if (user.getEmail() == null) {
+            log.info("Email is null, not persisting user until email field is made nullable.");
+            return;
+        }
+        userService.saveUser(user);
+    }
+
+    @KafkaListener(topics = "DELETED_CUSTOMER", containerFactory = "integerContainerFactory")
+    public void deletedCustomerListener(Integer id) {
+        log.info("Received deleted customer: {}", id);
+        userService.deleteUser(id);
+    }
 }
