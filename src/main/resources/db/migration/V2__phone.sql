@@ -1,0 +1,2 @@
+ALTER TABLE user
+    ADD phone VARCHAR(255) NULL;
