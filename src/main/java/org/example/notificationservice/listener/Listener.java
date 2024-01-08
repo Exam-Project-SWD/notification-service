@@ -39,6 +39,17 @@ public class Listener {
     @KafkaListener(topics = "DELETED_CUSTOMER", containerFactory = "integerContainerFactory")
     public void deletedCustomerListener(Integer id) {
         log.info("Received deleted customer: {}", id);
-        userService.deleteUser(id);
+        try {
+            User user = userService.getUser(id);
+            emailService.sendEmail(user.getEmail(), "Your MTOGO account has successfully been deleted",
+                    """
+                            We're sorry to see you go, but we appreciate you stopping by. Maybe in the future you'll come back to us. Until then, we wish you all the best!
+
+                            Best regards,
+                            The MTOGO team""");
+            userService.deleteUser(id);
+        } catch (Exception e) {
+            log.error("Failed to delete user", e);
+        }
     }
 }
